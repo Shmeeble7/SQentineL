@@ -8,41 +8,48 @@
     <title>SQentineL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-   
+
 
 
 
     <div class="banner" id="home">
         <div class="container">
-            <div class="row banner-text">
+            
 
-                <div class="slider-info col-lg-6">
-                    <div class="banner-info-grid mt-lg-5">
-                        <h2>SQentineL</h2><br>
-                        <p>A education oriented SAST tool for python.</p>
+                <div class="row banner-text">
+
+                    <div class="slider-info col-lg-6">
+                        <div class="banner-info-grid mt-lg-5">
+                            <div id="particles-js"></div>
+                            <h2>SQentineL</h2><br>
+                            <p>A education oriented SAST tool for python.</p>
+                        </div>
                     </div>
+                    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bottomAlign">
+                        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+
+                        </a> <ul class="nav nav-pills">
+                            <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                            <li class="nav-item"><a href="results.html" class="nav-link">Output</a></li>
+                            <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                            <li class="nav-item"><a href="#FAQs" class="nav-link">FAQs</a></li>
+                            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                        </ul>
+                    </header>
                 </div>
-                
-                <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bottomAlign">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                        
-                    </a> <ul class="nav nav-pills">
-                        <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
-                        <li class="nav-item"><a href="results.html" class="nav-link">Output</a></li>
-                        <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
-                        <li class="nav-item"><a href="#FAQs" class="nav-link">FAQs</a></li>
-                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                    </ul>
-                </header>
-            </div>
+            
         </div>
     </div>
 
 
-    
+
 </head>
 
 <body>
+
+
+
+
 
 
     <div class="container d-flex w-75 mt-3" id="submitCode">
@@ -98,9 +105,122 @@
     </footer>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="script.js"></script>
 
+
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 170,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                },
+                "image": {
+                    "src": "img/github.svg",
+                    "width": 100,
+                    "height": 100
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": false,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 1,
+                "direction": "top",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": false,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+</script>
 <style>
     #messageBox {
         min-width: 75%;
@@ -111,14 +231,16 @@
         padding: 8px;
         box-sizing: border-box;
     }
+
     .banner {
         background: #0082c9 linear-gradient(350deg,#245167,#006fab);
         position: relative;
-        z-index: 1;
+        z-index: 0;
         height: 100vh;
         align-items: center;
         display: flex;
     }
+
     h2 {
         color: #fff;
         display: flex;
@@ -126,18 +248,30 @@
         line-height: 65px;
         letter-spacing: 1px;
     }
+
     p {
         font-size: 16px;
         color: #ddd;
         margin: 0;
         align-items: center; /* Centers vertically */
     }
+
     .bottomAlign {
         position: absolute;
         bottom: 0;
         left: 0;
     }
-    
+    #particles-js {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1; /* keeps it behind other content */
+    }
+    .background{
+        z-index: 3;
+    }
 </style>
 
 </html>
