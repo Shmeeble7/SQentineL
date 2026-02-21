@@ -1,24 +1,3 @@
-document.getElementById("sendBtn").addEventListener("click", function () {
-
-
-    const api_url = 'http://localhost:8000/analyze';
-
-    dataToSend = "Malicious SQL Query"
-
-    fetch(api_url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control': 'Allow-Origin'
-        },
-        body: JSON.stringify(dataToSend)
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-        })
-})
-
 const textarea = document.getElementById("messageBox");
 
 textarea.addEventListener("input", () => {
@@ -27,19 +6,33 @@ textarea.addEventListener("input", () => {
 });
 
 async function sendText() {
-    const textValue = document.getElementById("sendBtn").value;
 
-    const response = await fetch("http://127.0.0.1:8000/analyze", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            text: textValue
-        })
-    });
+    const dataToSend = {
+        "text": textarea.value
+    }
 
-    const data = await response.json();
-    console.log(data);
-    alert(data.message);
+    async function sendData() {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/analyze", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dataToSend)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Success:", data.results);
+
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    sendData();
 }
