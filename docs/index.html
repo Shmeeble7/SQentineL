@@ -25,8 +25,8 @@
                     <div class="mt-lg-5 d-flex align-items-center p-4">
 
                         <div>
-                            <h2 class="mb-2">SQentineL</h2>
-                            <p class="mb-0">An education-oriented SAST tool for Python.</p>
+                            <h1 class="mb-2">SQentineL</h1>
+                            <h6 class="mb-0">An education-oriented SAST tool for Python.</h6>
                         </div>
 
                         <div class="ms-auto">
@@ -69,19 +69,37 @@
                 <button onclick="sendText()" class="btn navy-btn" type="button" id="sendBtn">Submit Code</button>
             </div>
 
-                <div class="box ms-5 ps-5 ">
-                    <input class ="ms-5 "type="file" id="fileInput" accept=".pdf,.jpg,.png, .txt" />
-                    <div id="status"></div>
-                </div>
+            <div class="box ms-5 ps-5 ">
+                <input class="ms-5 " type="file" id="fileInput" accept=".pdf,.jpg,.png, .txt" />
+                <div id="status"></div>
             </div>
-
-
-
-
         </div>
+
+
+
 
     </div>
 
+    </div>
+
+    <div class="container d-flex w-75" id="FAQs">
+        <div class="box"><h2>Features</h2></div>
+
+    </div>
+
+    <div class="container d-flex w-75" id="features">
+        <div class="box"><h5>Detects SQL Injection</h5></div>
+    </div>
+    <div class="container d-flex w-75" id="features">
+        <div class="box"><p>Detects SQL Injection</p></div>
+    </div>
+
+    <div class="container d-flex w-75" id="features">
+        <div class="box"><h5>Detects Command Line Injections</h5></div>
+    </div>
+    <div class="container d-flex w-75" id="features">
+        <div class="box"><p>Detects Command Line Injections</p></div>
+    </div>
 
     <div class="container d-flex w-75" id="features">
         <div class="box"><h5>Provides Educational Feedback</h5></div>
@@ -93,13 +111,13 @@
 
 
     <div class="container d-flex w-75" id="FAQs">
-        <div class="box"><h1>FAQs</h1></div>
+        <div class="box"><h2>FAQs</h2></div>
         <div class="box"></div>
         <div class="box"></div>
     </div>
 
     <div class="container d-flex w-75" id="about">
-        <div class="box"><h1>About</h1></div>
+        <div class="box"><h2>About</h2></div>
         <div class="box"></div>
         <div class="box"></div>
     </div>
@@ -254,7 +272,7 @@
         display: flex;
     }
 
-    h2 {
+    h1 {
         color: #fff;
         display: flex;
         font-size: 3.5em;
@@ -271,8 +289,15 @@
     h5{
         font-weight:bold;
     }
-    h1 {
+    h6{
+        font-size: 20px;
+        color: white;
+
+    }
+    h3 {
         font-weight: bold;
+        font-size: 80px;
+        color: white;
     }
 
 
