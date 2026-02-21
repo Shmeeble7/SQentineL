@@ -19,17 +19,17 @@ class Issue:
     example_fix: Optional[str] = None
 
 
-def to_dict(self):
-    return {
-        "line": self.line,
-        "rule_id": self.rule_id,
-        "severity": self.severity,
-        "confidence": self.confidence,
-        "title": self.title,
-        "explanation": self.explanation,
-        "danger": self.danger,
-        "fix": self.fix,
-        "example_payload": self.example_payload,
-        "example_fix": self.example_fix,
-        "code_snippet": self.code_snippet,
-    }
+    def to_dict(self):
+        return {
+            "line": self.line,
+            "rule_id": self.rule_id,
+            "severity": self.severity,
+            "confidence": self.confidence,
+            "title": self.title,
+            "explanation": self.explanation,
+            "danger": self.danger,
+            "fix": self.fix,
+            "example_payload": self.example_payload,
+            "example_fix": self.example_fix,
+            "code_snippet": self.code_snippet,
+        }
