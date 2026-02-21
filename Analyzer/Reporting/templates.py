@@ -32,14 +32,9 @@ TEMPLATES = {
 
     "SQLI_FSTRING": {
         "title": "SQL query built using f-string",
-        "explanation":
-            "Python f-strings insert variables directly into SQL text.",
-
-        "danger":
-            "If the variable contains SQL, it becomes part of the command.",
-
-        "fix":
-            "Use placeholders (?) and pass variables separately."
+        "explanation": "Python f-strings insert variables directly into SQL text.",
+        "danger": "If the variable contains SQL, it becomes part of the command.",
+        "fix": "Use placeholders (?) and pass variables separately."
     },
 
     "CMDI_OS": {
@@ -59,4 +54,33 @@ TEMPLATES = {
         "example_payload": "host=8.8.8.8; cat /etc/passwd",
         "example_fix": "subprocess.run(['ping','-c','1',host])"
     },
+
+    "SQLI_RETURN": {
+        "title": "User input returned from function reaches SQL query",
+        "explanation": "Tainted data returned from a function is used in a SQL query.",
+        "danger": "Attackers can inject arbitrary SQL by controlling returned values.",
+        "fix": "Validate or parameterize returned data before database execution.",
+        "severity": "HIGH",
+        "confidence": "HIGH",
+    },
+
+    "IMPROPER_INPUT":  {
+        "title": "Improper input",
+        "explanation": "The text you entered was not a valid form of input",
+        "danger": "You can't learn anything :(",
+        "fix": "SQentineL can only handle python code currently",
+        "severity": "INFO",
+        "confidence": "HIGH",
+    },
+
+    "SYNTAX_ERROR":  {
+        "title": "Improper syntax",
+        "explanation": "Your input contains a syntax error",
+        "danger": "SQentineL cannot analyze that code",
+        "fix": "Fix your program syntax before passing in the code",
+        "severity": "INFO",
+        "confidence": "HIGH",
+    }
+
+
 }

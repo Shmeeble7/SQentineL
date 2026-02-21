@@ -47,7 +47,7 @@ category = get_user_input()
 cursor.execute("SELECT * FROM items WHERE category = '" + category + "'")
 
 
-# 7 — multi-step taint
+# multi-step taint
 raw = input("Raw: ")
 processed = raw.strip()
 final_query = "SELECT * FROM data WHERE value = '" + processed + "'"
