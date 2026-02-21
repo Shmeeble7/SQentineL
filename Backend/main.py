@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from Analyzer.engine import analyze
+
 app = FastAPI()
 
 origins = [
@@ -17,6 +20,9 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+class CodeInput(BaseModel):
+    code: str
+
 @app.get("/")
 async def root():
     message = "SQentineL rocks!!!"
@@ -27,3 +33,7 @@ async def read_query():
     #here we see if the query is good or bad
     message = "Hopefully you know good development practices because we can't check your queries yet!"
     return {"message": message}
+
+@app.post("/analyze")
+def scan(input: CodeInput):
+    return {"issues": analyze(input.code)}
