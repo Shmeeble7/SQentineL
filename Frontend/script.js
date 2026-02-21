@@ -18,3 +18,10 @@ document.getElementById("sendBtn").addEventListener("click", function () {
             console.log(data.message);
         })
 })
+
+const textarea = document.getElementById("messageBox");
+
+textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";              // Reset height
+    textarea.style.height = textarea.scrollHeight + "px";  // Expand to fit content
+});
