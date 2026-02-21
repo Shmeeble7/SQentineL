@@ -25,7 +25,7 @@ window.onload = function () {
                 const fileContent = e.target.result;
                 const dataToSend = { "text": fileContent };
                 try {
-                    const response = await fetch("http://127.0.0.1:8000/analyze", {
+                    const response = await fetch("https://shmeeble7.github.io/SQentineL/Analyzer/analyze", {
                         method: "POST",
                         headers: {
                             "Accept": "application/json",
@@ -71,7 +71,7 @@ async function sendText() {
 
     async function sendData() {
         try {
-            const response = await fetch("http://127.0.0.1:8000/analyze", {
+            const response = await fetch("https://shmeeble7.github.io/SQentineL/Analyzer/analyze", {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
