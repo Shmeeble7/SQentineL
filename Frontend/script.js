@@ -1,9 +1,9 @@
 document.getElementById("sendBtn").addEventListener("click", function () {
 
 
-    const api_url = 'http://localhost:8000/query';
+    const api_url = 'http://localhost:8000/analyze';
 
-    data = "Malicious SQL Query"
+    dataToSend = "Malicious SQL Query"
 
     fetch(api_url, {
         method: 'POST',
@@ -11,7 +11,7 @@ document.getElementById("sendBtn").addEventListener("click", function () {
             'Content-Type': 'application/json',
             'Access-Control': 'Allow-Origin'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(dataToSend)
     })
         .then(response => response.json())
         .then(data => {
