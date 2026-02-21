@@ -8,30 +8,44 @@
     <title>SQentineL</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+   
 
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-                <span class="fs-4">SQentineL</span>
-            </a> <ul class="nav nav-pills">
-                <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="results.html" class="nav-link">Output</a></li>
-                <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
-                <li class="nav-item"><a href="#FAQs" class="nav-link">FAQs</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-            </ul>
-        </header>
 
+
+    <div class="banner" id="home">
+        <div class="container">
+            <div class="row banner-text">
+
+                <div class="slider-info col-lg-6">
+                    <div class="banner-info-grid mt-lg-5">
+                        <h2>SQentineL</h2><br>
+                        <p>A education oriented SAST tool for python.</p>
+                    </div>
+                </div>
+                
+                <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bottomAlign">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                        
+                    </a> <ul class="nav nav-pills">
+                        <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                        <li class="nav-item"><a href="results.html" class="nav-link">Output</a></li>
+                        <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                        <li class="nav-item"><a href="#FAQs" class="nav-link">FAQs</a></li>
+                        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    </ul>
+                </header>
+            </div>
+        </div>
     </div>
+
+
+    
 </head>
 
 <body>
 
 
-    <div class="container d-flex w-75" id="submitCode">
+    <div class="container d-flex w-75 mt-3" id="submitCode">
         <div class="box"><h1>Submit Code</h1></div>
         <div class="box"></div>
         <div class="box"></div>
@@ -97,6 +111,33 @@
         padding: 8px;
         box-sizing: border-box;
     }
+    .banner {
+        background: #0082c9 linear-gradient(350deg,#245167,#006fab);
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+        align-items: center;
+        display: flex;
+    }
+    h2 {
+        color: #fff;
+        display: flex;
+        font-size: 3.5em;
+        line-height: 65px;
+        letter-spacing: 1px;
+    }
+    p {
+        font-size: 16px;
+        color: #ddd;
+        margin: 0;
+        align-items: center; /* Centers vertically */
+    }
+    .bottomAlign {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    
 </style>
 
 </html>

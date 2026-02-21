@@ -40,5 +40,23 @@ TEMPLATES = {
 
         "fix":
             "Use placeholders (?) and pass variables separately."
-    }
+    },
+
+    "CMDI_OS": {
+        "title": "User input executed as system command",
+        "explanation": "User-controlled data is passed directly into a system shell command.",
+        "danger": "An attacker can execute arbitrary commands on the server.",
+        "fix": "Avoid os.system/popen. Use subprocess.run with argument list.",
+        "example_payload": "filename=; rm -rf /",
+        "example_fix": "subprocess.run(['cat', filename])"
+    },
+
+    "CMDI_SUBPROCESS": {
+        "title": "Shell command constructed from user input",
+        "explanation": "The program builds a shell command using user input while shell=True is enabled.",
+        "danger": "Attackers can inject additional shell commands.",
+        "fix": "Remove shell=True and pass arguments as a list.",
+        "example_payload": "host=8.8.8.8; cat /etc/passwd",
+        "example_fix": "subprocess.run(['ping','-c','1',host])"
+    },
 }
