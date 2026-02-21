@@ -40,7 +40,10 @@ async function sendText() {
                 localStorage.setItem(key, JSON.stringify(data.results[x]))
             }
 
-            getResults();
+            if (data.results.length == 0) {
+                localStorage.clear()
+            }
+
 
         } catch (error) {
             console.error("Error:", error);
