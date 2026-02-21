@@ -29,13 +29,12 @@
 
 <body>
 
+    
 
 
     <div class="mb-3">
         <div class="d-flex justify-content-center">
-            <input type="email" class="form-control w-50" id="exampleFormControlInput1" placeholder="Enter your Code Here . . . ">
-
-        </div>
+            <textarea id="messageBox" rows="1" placeholder="Type here..."></textarea>        </div>
 
 
 
@@ -64,6 +63,20 @@
 
         
 <script src="script.js"></script>
+
+<style>
+
+    #messageBox {
+        width: 300px;
+        min-height: 40px;
+        resize: none; /* Prevent manual drag resize */
+        overflow: hidden; /* Hide scrollbar */
+        font-size: 16px;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+</style>
 
 
 </html>
