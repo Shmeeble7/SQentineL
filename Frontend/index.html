@@ -54,10 +54,8 @@
 
 
 
-    <div class="container d-flex w-75 mt-3 justify-content-center navy-txt fw-bolder" id="submitCode">
-        <div class="box "><h1>Test Your Code Here!</h1></div>
-        <div class="box"></div>
-        <div class="box"></div>
+    <div class="container d-flex w-75 mt-3 justify-content-center" id="submitCode">
+        <div class="navy-txt fw-bolder box "><h1>Test Your Code Here!</h1></div>
     </div>
 
 
@@ -66,18 +64,17 @@
             <textarea id="messageBox" rows="1" class="rounded" placeholder="Type or paste your code here . . . "></textarea>
         </div>
 
-        <div>
-
-            <div class=" container d-flex w-75 mt-3 flex-row align-items-center justify-content-center g-5" id="submitCode">
-                <div class="box mr-5">
-                    <button onclick="sendText()" class="btn navy-btn" type="button" id="sendBtn">Submit Code</button>
-                </div>
+        <div class=" container d-flex w-75 mt-3 flex-row align-items-center justify-content-center g-5" id="submitCode">
+            <div class="box mr-5">
+                <button onclick="sendText()" class="btn navy-btn" type="button" id="sendBtn">Submit Code</button>
+            </div>
 
                 <div class="box ms-5 ps-5 ">
-                    <input class="ms-5 " type="file" id="fileInput" accept=".pdf,.jpg,.png, .txt" />
+                    <input class ="ms-5 "type="file" id="fileInput" accept=".pdf,.jpg,.png, .txt" />
                     <div id="status"></div>
                 </div>
             </div>
+
 
 
 
@@ -85,25 +82,6 @@
 
     </div>
 
-
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><h1><b>Features</b></h1></div>
-
-    </div>
-
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><h5>Detects SQL Injections</h5></div>
-    </div>
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><p>Detects SQL Injections</p></div>
-    </div>
-
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><h5>Detects Command Line Injections</h5></div>
-    </div>
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><p>Detects Command Line Injections</p></div>
-    </div>
 
     <div class="container d-flex w-75" id="features">
         <div class="box"><h5>Provides Educational Feedback</h5></div>
@@ -325,6 +303,8 @@
     .navy-btn {
         color: white;
         background-color: #000035;
+        border: solid; 
+        border-color: #000035;
     }
 
         .navy-btn:hover {

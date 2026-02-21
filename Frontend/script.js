@@ -47,9 +47,8 @@ window.onload = function () {
                         localStorage.setItem(key, JSON.stringify(data.results[x]))
                     }
 
-                    if (data.results.length == 0) {
-                        localStorage.clear()
-                    }
+                    window.location.href = "results.html";
+
 
                 } catch (error) {
                     console.error("Error:", error);
@@ -94,9 +93,8 @@ async function sendText() {
                 localStorage.setItem(key, JSON.stringify(data.results[x]))
             }
 
-            if (data.results.length == 0) {
-                localStorage.clear()
-            }
+            window.location.href = "results.html";
+
 
         } catch (error) {
             console.error("Error:", error);
