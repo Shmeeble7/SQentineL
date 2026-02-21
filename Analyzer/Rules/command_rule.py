@@ -64,24 +64,25 @@ class CommandInjectionRule(BaseRule):
         if not isinstance(node.func, ast.Attribute):
             return
 
-        func = node.func.attr
+        attr = node.func.attr
 
-        # os.system / os.popen
-        if func in ("system", "popen"):
-            if self.command_arg_is_tainted(node):
-                self.report(node, "CMDI_OS")
-            return
+        # ---- os.system / popen ----
+        if isinstance(node.func.value, ast.Name):
+            if node.func.value.id == "os":
+                if attr in ("system", "popen"):
+                    if self.command_arg_is_tainted(node):
+                        self.report(node, "CMDI_OS")
+                    return
 
-        # subprocesses
-        if func in ("run", "call", "Popen"):
+        # ---- subprocess ----
+        if isinstance(node.func.value, ast.Name):
+            module = node.func.value.id
 
-            # shell=True
-            if self._is_shell_true(node):
-                if self.command_arg_is_tainted(node):
-                    self.report(node, "CMDI_SUBPROCESS")
-                return
+            if hasattr(self.analyzer, "import_aliases") and \
+                    module in self.analyzer.import_aliases:
+                if self.analyzer.import_aliases[module] == "subprocess":
 
-            # shell=False but forced shell via list
-            if node.args and isinstance(node.args[0], (ast.List, ast.Tuple)):
-                if self._list_contains_shell(node.args[0]):
-                    self.report(node, "CMDI_SUBPROCESS")
+                    if attr in ("run", "call", "Popen"):
+
+                        if self._is_shell_true(node) and self.command_arg_is_tainted(node):
+                            self.report(node, "CMDI_SUBPROCESS")

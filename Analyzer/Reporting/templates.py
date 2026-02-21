@@ -80,7 +80,85 @@ TEMPLATES = {
         "fix": "Fix your program syntax before passing in the code",
         "severity": "INFO",
         "confidence": "HIGH",
-    }
+    },
+
+    "EVAL_TAINT": {
+        "title": "User input executed as Python code",
+        "explanation":
+            "User-controlled data is passed directly into a dynamic execution function such as eval or exec.",
+
+        "danger":
+            "An attacker can execute arbitrary Python code on the server.",
+
+        "fix":
+            "Avoid using eval/exec on user input. Use safer alternatives like literal parsing or explicit logic.",
+
+        "example_payload": "__import__('os').system('whoami')",
+        "example_fix":
+            "Use ast.literal_eval() for safe expression parsing."
+    },
 
 
+    "EVAL_CONCAT": {
+        "title": "Dynamic code built using string concatenation",
+        "explanation":
+            "Python code is constructed using + with untrusted data before being executed.",
+
+        "danger":
+            "Attackers can inject arbitrary Python statements into the constructed code.",
+
+        "fix":
+            "Do not build executable code using string concatenation. Refactor to avoid dynamic execution.",
+
+        "example_payload": "1); __import__('os').system('ls') #",
+        "example_fix":
+            "Replace dynamic execution with direct function calls or safe parsing."
+    },
+
+
+    "EVAL_FSTRING": {
+        "title": "Dynamic code built using f-string",
+        "explanation":
+            "Python f-strings insert variables directly into executable code text.",
+
+        "danger":
+            "If the variable contains malicious Python, it becomes part of the executed code.",
+
+        "fix":
+            "Avoid f-strings for executable code. Use controlled logic instead of dynamic execution.",
+
+        "example_payload": "__import__('os').system('cat /etc/passwd')",
+        "example_fix":
+            "Remove eval/exec and handle user input safely without execution."
+    },
+
+
+    "EVAL_RETURN": {
+        "title": "Tainted return value executed as Python code",
+        "explanation":
+            "User input flows through a function and is later executed dynamically.",
+
+        "danger":
+            "Even indirect user input can lead to full remote code execution.",
+
+        "fix":
+            "Validate or sanitize returned values before use, and avoid dynamic execution functions.",
+
+        "example_payload": "__import__('subprocess').getoutput('whoami')",
+        "example_fix":
+            "Ensure functions return validated data and remove eval/exec usage."
+    },
+
+
+    "EVAL_GENERIC": {
+        "title": "Tainted data reaches dynamic execution",
+        "explanation":
+            "Untrusted data is used in a dynamic execution context.",
+
+        "danger":
+            "This can result in arbitrary code execution and full system compromise.",
+
+        "fix":
+            "Remove dynamic execution of untrusted input and redesign the logic safely."
+    },
 }

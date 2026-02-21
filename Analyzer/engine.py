@@ -14,7 +14,7 @@ def make_issue(rule_id, line, snippet=""):
         line=line,
         rule_id=rule_id,
         code_snippet=snippet,
-        severity=t.get("severity", "INFO"),
+        severity=t.get("severity", "LOW"),
         confidence=t.get("confidence", "HIGH"),
         title=t["title"],
         explanation=t["explanation"],
@@ -59,6 +59,7 @@ class Analyzer(ast.NodeVisitor):
         self.current_function = None
         self.tainted_returns = set()
         self.learning_returns = False
+        self.import_aliases = {}
 
     def contains_source(self, node):
         if isinstance(node, ast.Call):
@@ -103,10 +104,34 @@ class Analyzer(ast.NodeVisitor):
 
         return False
 
+
+    # Handle return statements
     def visit_Return(self, node):
         if self.learning_returns and node.value and self.expr_is_tainted(node.value):
             if self.current_function:
                 self.tainted_returns.add(self.current_function)
+
+        self.generic_visit(node)
+
+    # Handle import statements, obviously this is not every possible alias but it's all we need for now
+    def visit_Import(self, node):
+        for alias in node.names:
+            if alias.name == "subprocess":
+                self.import_aliases[alias.asname or alias.name] = "subprocess"
+            if alias.name == "os":
+                self.import_aliases[alias.asname or alias.name] = "os"
+
+        self.generic_visit(node)
+
+    # Handle from import statements, obviously this is not every possible alias but it's all we need for now
+    def visit_ImportFrom(self, node):
+        if node.module == "subprocess":
+            for alias in node.names:
+                self.import_aliases[alias.asname or alias.name] = "subprocess"
+
+        if node.module == "os":
+            for alias in node.names:
+                self.import_aliases[alias.asname or alias.name] = "os"
 
         self.generic_visit(node)
 
@@ -118,30 +143,29 @@ class Analyzer(ast.NodeVisitor):
 
         self.current_function = previous
 
-    def visit(self, node):
+    #Handle Assignments
+    def visit_Assign(self, node):
+        value_tainted = self.expr_is_tainted(node.value)
 
-        if isinstance(node, ast.Assign):
-            value_tainted = self.expr_is_tainted(node.value)
-            # Check return values for taint
-            if isinstance(node.value, ast.Call) and isinstance(node.value.func, ast.Name):
-                if node.value.func.id in self.tainted_returns:
-                    value_tainted = True
+        if isinstance(node.value, ast.Call) and isinstance(node.value.func, ast.Name):
+            if node.value.func.id in self.tainted_returns:
+                value_tainted = True
 
-            for target in node.targets:
-                if isinstance(target, ast.Name):
-                    if value_tainted:
-                        self.tainted.add(target.id)
-                    elif target.id in self.tainted:
-                        self.tainted.remove(target.id)
+        for target in node.targets:
+            if isinstance(target, ast.Name):
+                if value_tainted:
+                    self.tainted.add(target.id)
+                else:
+                    self.tainted.discard(target.id)
 
-        # Maintain taint through function calls
-        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+    # Handle function calls
+    def visit_Call(self, node):
+        if isinstance(node.func, ast.Name):
             func_name = node.func.id
 
             if func_name in self.functions:
                 func_def = self.functions[func_name]
 
-                # Save current taint state
                 original_taint = self.tainted.copy()
 
                 for arg, param in zip(node.args, func_def.args.args):
@@ -151,17 +175,22 @@ class Analyzer(ast.NodeVisitor):
                 for stmt in func_def.body:
                     self.visit(stmt)
 
-                # Restore previous taint state
                 self.tainted = original_taint
                 return
 
+    def visit(self, node):
+        method = 'visit_' + node.__class__.__name__
+        visitor = getattr(self, method, None)
+        if visitor:
+            visitor(node)
+
+        # rule execution
         if not self.learning_returns:
             for rule in self.rules:
-                method = getattr(rule, f"visit_{type(node).__name__}", None)
-                if method:
-                    method(node)
-
-        self.generic_visit(node)
+                rule_method = getattr(rule, f"visit_{type(node).__name__}", None)
+                if rule_method:
+                    rule_method(node)
+        super().generic_visit(node)
 
     def results(self):
         issues = []
@@ -205,7 +234,7 @@ def analyze(code: str):
         analyzer.learning_returns = False
         changed = before != analyzer.tainted_returns
 
-    print("TAINTED RETURNS LEARNED:", analyzer.tainted_returns)
+    # print("TAINTED RETURNS LEARNED:", analyzer.tainted_returns)
 
     analyzer.source_lines = code.splitlines()
     analyzer.visit(tree)
