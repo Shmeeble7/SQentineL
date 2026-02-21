@@ -2,8 +2,8 @@
 const textarea = document.getElementById("messageBox");
 
 textarea.addEventListener("input", () => {
-    textarea.style.height = "auto";              // Reset height
-    textarea.style.height = textarea.scrollHeight + "px";  // Expand to fit content
+    textarea.style.height = "auto";         
+    textarea.style.height = textarea.scrollHeight + "px"; 
 });
 
 
@@ -36,14 +36,12 @@ async function sendText() {
 
             for (let x = 0; x < data.results.length; x++) {
                 let key = "results" + x;
-                console.log(data.results[x])
                 localStorage.setItem(key, JSON.stringify(data.results[x]))
             }
 
             if (data.results.length == 0) {
                 localStorage.clear()
             }
-
 
         } catch (error) {
             console.error("Error:", error);
