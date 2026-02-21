@@ -4,3 +4,7 @@
 
 /.vs
 /backend/__pycache__
+/Analyzer/Reporting/__pycache__
+/Analyzer/__pycache__
+/__pycache__
+/Analyzer/Rules/__pycache__
