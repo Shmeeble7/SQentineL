@@ -14,10 +14,12 @@ class BaseRule:
         template = TEMPLATES[template_key]
 
         severity, confidence = self.score(template_key, evidence)
+        source = self.analyzer.source_lines[node.lineno - 1]
 
         issue = Issue(
             line=node.lineno,
             rule_id=self.id,
+            code_snippet=source,
             severity=severity,
             confidence=confidence,
             title=template["title"],

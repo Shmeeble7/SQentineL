@@ -25,3 +25,8 @@ class CodeInput(BaseModel):
 def scan(request: CodeInput):
     results = analyze(request.text)
     return {"results": request.text}
+
+
+def analyze_to_json(code: str):
+    issues = analyze(code)
+    return [issue.to_dict() for issue in issues]

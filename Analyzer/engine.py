@@ -82,5 +82,6 @@ def analyze(code: str):
         }]
 
     analyzer = Analyzer()
+    analyzer.source_lines = code.splitlines()
     analyzer.visit(tree)
     return analyzer.results()

@@ -4,7 +4,11 @@ from Analyzer.engine import analyze
 def print_results(results):
     for issue in results:
         print(f"\nLine {issue.line} — {issue.title}")
+        if issue.code_snippet:
+            print("Code:", issue.code_snippet.strip())
+
         print(f"Severity: {issue.severity} | Confidence: {issue.confidence}")
+
         print("Why:", issue.explanation)
         print("Risk:", issue.danger)
         print("Fix:", issue.fix)
@@ -14,6 +18,7 @@ def print_results(results):
 
         if issue.example_fix:
             print("Safer code:", issue.example_fix)
+
 
 
 def run_from_file(path):
