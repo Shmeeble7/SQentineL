@@ -10,6 +10,9 @@ class BaseRule:
         self.analyzer = analyzer
         self.issues = []
 
+    def is_tainted(self, node):
+        return self.analyzer.expr_is_tainted(node)
+
     def report(self, node, template_key, evidence=None):
         template = TEMPLATES[template_key]
 
@@ -41,6 +44,12 @@ class BaseRule:
 
         if template_key == "SQLI_CONCAT":
             return "MEDIUM", "MEDIUM"
+
+        if template_key == "CMDI_OS":
+            return "CRITICAL", "HIGH"
+
+        if template_key == "CMDI_SUBPROCESS":
+            return "CRITICAL", "MEDIUM"
 
         return "LOW", "LOW"
 
