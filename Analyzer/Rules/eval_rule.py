@@ -1,8 +1,11 @@
-from base import BaseRule
+from Analyzer.Rules.base import BaseRule
 import ast
 
 
 class EvalRule(BaseRule):
+    def __init__(self, analyzer):
+        super().__init__(analyzer)
+
     id = "EVAL"
     description = "Arbitrary Code Execution"
     severity = "CRITICAL"

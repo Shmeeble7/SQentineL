@@ -1,24 +1,34 @@
-from base import BaseRule
+from Analyzer.Rules.base import BaseRule
 import ast
 
 
 class SQLInjectionRule(BaseRule):
+
     id = "SQLI"
     description = "SQL Injection"
     severity = "HIGH"
 
-    def visit_JoinedStr(self, node):
-        self.report(
-            node,
-            "SQL query built using f-string interpolation",
-            "Use parameterized query"
-        )
-
     def visit_Call(self, node):
-        if isinstance(node.func, ast.Attribute):
-            if node.func.attr == "execute" and len(node.args) == 1:
-                self.report(
-                    node,
-                    "Query executed without parameters",
-                    "Use execute(query, params)"
-                )
+        if getattr(node.func, "attr", "") != "execute":
+            return
+
+        if not node.args:
+            return
+
+        query = node.args[0]
+
+        # variable passed
+        if isinstance(query, ast.Name):
+            if query.id in self.analyzer.tainted:
+                self.report(node, "SQLI_TAINT", evidence="tainted variable reaches execute")
+
+        # direct f-string
+        if isinstance(query, ast.JoinedStr):
+            if self.analyzer.expr_is_tainted(query):
+                self.report(node, "SQLI_FSTRING", evidence="fstring contains tainted data")
+
+        # string concatenation
+        if isinstance(query, ast.BinOp):
+            if self.analyzer.expr_is_tainted(query):
+                self.report(node, "SQLI_CONCAT", evidence="string concatenation with tainted data")
+
