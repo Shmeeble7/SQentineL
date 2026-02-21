@@ -29,7 +29,9 @@
     </div>
 
     <div class="container d-flex flex-column justify-content-center align-items-center w-75" id="results">
-        <div class="box d-flex flex-row "><h1>Here Are Your Results</h1></div>
+        <div class="box d-flex flex-row "><h1>Here Are Your Results:</h1></div>
+        <h5 id="safe-div" class="p-2 box flex-row rounded">Your SQL is safe! Good job!</h5>
+
     </div>
 
 </body>
@@ -55,8 +57,10 @@
         background-size: 100px 100px; /* Adjust size to control tiling */
     }
 
-    #safe_div {
+    #safe-div {
         display: none;
+        border-style: solid;
+        background-color: lightgreen;
     }
 
     .info-div-body {
@@ -66,12 +70,24 @@
         padding: 20px;
     }
 
+    .info-div-header {
+        min-width: 50vw;
+    }
+
     .hidden-box {
         display: none;
     }
 
     .info-div-header {
         border-style: solid;
+    }
+
+    .active-caret {
+        display: block;
+    }
+
+    .inactive-caret {
+        display: none;
     }
 </style>
 
