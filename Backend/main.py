@@ -6,22 +6,20 @@ from Analyzer.engine import analyze
 app = FastAPI()
 
 origins = [
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:64101",
-    "http://localhost:8000",
     "http://127.0.0.1:5500"
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )
 
 class CodeInput(BaseModel):
-    code: str
+    def __init__(code:str):
+        self.code = code
 
 @app.get("/")
 async def root():
@@ -34,6 +32,7 @@ async def read_query():
     message = "Hopefully you know good development practices because we can't check your queries yet!"
     return {"message": message}
 
-@app.post("/analyze")
-def scan(input: CodeInput):
-    return {"issues": analyze(input.code)}
+@app.post("/analyze/{code}")
+def scan(code):
+    codeInput = CodeInput(code)
+    return {"issues": analyze(codeInput)}
