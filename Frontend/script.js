@@ -1,5 +1,4 @@
 
-
 const textarea = document.getElementById("messageBox");
 
 textarea.addEventListener("input", () => {
@@ -8,13 +7,7 @@ textarea.addEventListener("input", () => {
 });
 
 
-function getResults() {
-    for (const [key, value] of Object.entries(localStorage)) {
-        for (const [result_key, result_value] of Object.entries(JSON.parse(localStorage.getItem(key)))) {
-            console.log(`${result_key}: ${result_value}`);
-        }
-    }
-}
+
 
 async function sendText() {
 
