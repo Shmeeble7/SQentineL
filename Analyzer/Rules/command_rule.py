@@ -1,8 +1,11 @@
-from base import BaseRule
+from Analyzer.Rules.base import BaseRule
 import ast
 
 
 class CommandInjectionRule(BaseRule):
+    def __init__(self, analyzer):
+        super().__init__(analyzer)
+
     id = "CMDI"
     description = "Command Injection"
     severity = "CRITICAL"
