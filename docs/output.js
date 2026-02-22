@@ -6,11 +6,11 @@ function addBox(key_num) {
     const key = "key-" + key_num;
     const key_header = "key-header-" + key_num;
     const key_btn = "key-btn-" + key_num;
-    container.innerHTML += `<div class="d-flex info-div flex-column pt-3">
-            <div id = "` + key_header + `" class="info-div-header d-flex flex-row justify-content-center align-items-center rounded">
-                <h4 class="severity p-2">SEVERITY </h4>
-                <p class=" title p-2 pt-3 me-5 text-center"></p>
-                <button onclick="openInfo('`+ key_num + `')" type="button" class="caret-down btn p-2 ms-5 ">
+    container.innerHTML += `<div class="d-flex info_div flex-column pt-3">
+            <div class="info-div-header d-flex flex-row align-items-center rounded">
+                <h4 class="` + key_header + ` justify-content-left ps-3 severity p-2">SEVERITY </h4>
+                <p class="` + key_header + ` title mt-3 me-auto "></p>
+                <button onclick="openInfo('`+ key_num + `')" type="button" class="caret-down btn p-2 ms-auto">
                     <svg class="active-caret ` + key_btn + `" xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-caret-down" >
                         <path d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659"/>
                     </svg>
@@ -67,34 +67,57 @@ window.onload = function () {
         }
 
         let iter = 0;
+        let low = 0;
+        let med = 0;
+        let high = 0;
+        let crit = 0;
         for (const [key, value] of Object.entries(localStorage)) {
+
             for (const [result_key, result_value] of Object.entries(JSON.parse(localStorage.getItem(key)))) {
                 const contentElement = document.getElementsByClassName(result_key)[iter];
                 if (contentElement != null && result_value != null) {
                     contentElement.innerHTML += result_value;
 
                     if (result_key == "severity") {
+                        let color = "black";
                         if (result_value == "LOW") {
-                            const header_key = "key-header-" + iter;
-                            const header = document.getElementById(header_key);
-                            header.style.backgroundColor = "yellow";
+                            color = "#A17F1A";
+                            low += 1;
                         }
                         else if (result_value == "MEDIUM") {
-                            const header_key = "key-header-" + iter;
-                            const header = document.getElementById(header_key);
-                            header.style.backgroundColor = "orange";
+                            color = "orange";
+                            med += 1;
+                        }
+                        else if (result_value == "HIGH") {
+                            color = "red";
+                            high += 1;
                         }
                         else {
-                            const header_key = "key-header-" + iter;
-                            const header = document.getElementById(header_key);
-                            header.style.backgroundColor = "red";
+                            color = "red";
+                            crit += 1;
+                        }
+                        const header_key = "key-header-" + iter;
+                        const headers = document.getElementsByClassName(header_key);
+                        for (let x = 0; x < headers.length; x++) {
+                            headers[x].style.color = color;
                         }
                     }
                 }
             }
             iter += 1;
         }
+        const img = document.getElementById("squid-img")
+        if (crit > 1) {
+            img.src = "Assets/AngrySquid.png";
+        }
+        else if (high > 1) {
+            img.src = "Assets/AngrySquid.png";
+        }
+        else {
+            img.src = "Assets/Squid.png";
+        }
     }
 
 };
+
 
