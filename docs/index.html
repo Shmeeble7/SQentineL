@@ -33,7 +33,7 @@
                 <ul class="nav nav-pills ms-auto">
                     <li class="nav-item"><a href="index.html" class="nav-link active-link">Home</a></li>
                     <li class="nav-item"><a href="results.html" class="nav-link">Output</a></li>
-                    <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                    <li class="nav-item"><a href="#edu" class="nav-link">Resources</a></li>
                     <li class="nav-item"><a href="#FAQs" class="nav-link">FAQs</a></li>
                     <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                 </ul>
@@ -59,39 +59,56 @@
         </div>
     </div>
 
-    <div class="container d-flex w-75" id="FAQs">
+    <div class="container d-flex w-75">
         <div class="box"><h2>Features</h2></div>
 
     </div>
 
-    <div class="container d-flex w-75" id="features">
+    <div class="container d-flex w-75" >
         <div class="box"><h5>Detects SQL Injection</h5></div>
     </div>
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><p>Detects SQL Injection</p></div>
+    <div class="container d-flex w-75" >
+        <div class="box"><p>(FString, Concatenation, .Format)</p></div>
     </div>
 
-    <div class="container d-flex w-75" id="features">
+    <div class="container d-flex w-75 mt-3" >
         <div class="box"><h5>Detects Command Line Injections</h5></div>
     </div>
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><p>Detects Command Line Injections</p></div>
+    <div class="container d-flex w-75" >
+        <div class="box"><p>(Shell injection and System Command Injection)</p></div>
     </div>
 
-    <div class="container d-flex w-75" id="features">
+    <div class="container d-flex w-75 mt-3" >
+        <div class="box"><h5>Detects Remote Code Execution</h5></div>
+    </div>
+    <div class="container d-flex w-75" >
+        <div class="box"><p>(Dynamic Code Execution Injection and Eval Injection)</p></div>
+    </div>
+
+    <div class="container d-flex w-75 mt-3" >
+        <div class="box"><h5>Supports File Input</h5></div>
+    </div>
+    <div class="container d-flex w-75" >
+        <div class="box"><p>We currently support python and text files.</p></div>
+    </div>
+
+    <div class="container d-flex w-75 mt-3" >
         <div class="box"><h5>Provides Educational Feedback</h5></div>
     </div>
-    <div class="container d-flex w-75" id="features">
-        <div class="box"><p>Detects Command Line Injections</p></div>
+    <div class="container d-flex w-75" >
+        <div class="box"><p>SQentineL is designed to support good programming habits</p></div>
+    </div>
+    <div class="container d-flex w-75" >
+        <div class="box"><p>by mitigating vulnerabilities in people's code and suggesting safer alternatives.</p></div>
     </div>
 
 
 
-    <div class="container d-flex w-75" id="FAQs">
+    <div class="container d-flex w-75 mt-5" id="FAQs">
         <div class="box"><h2>FAQs</h2></div>
     </div>
 
-    <div class="accordion mt-5" id="accordionExample">
+    <div class="accordion " id="accordionExample">
         <div class="accordion-item mx-auto w-75">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -100,19 +117,24 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <p>To operate the tool in the Windows CMD, first navigate to the project root on your device. Once there, type in <code>python -m Analyzer.Diagnostic.analyzer_test file [desiredFilePath]</code>. This will run the chosen file through the scanner and print the vulnerabilities in the terminal.</p>
                 </div>
             </div>
         </div>
         <div class="accordion-item mx-auto w-75">
             <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    What can be detected by this tool?
+                    How to setup the backend?
                 </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <p>In the event that the website backend connection is down, please do the following steps to restore functionality.</p>
+                    <ul>
+                        <li>Install the newest version of FastAPI if neccesary.</li>
+                        <li>Go the windows CMD and navigate to the root directory.</li>
+                        <li>Run the command <code>fastapi dev main.py</code>.</li>
+                    </ul> 
                 </div>
             </div>
         </div>
@@ -124,7 +146,7 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    SQentineL is not infallible, please use discretion when interepting its results.
                 </div>
             </div>
         </div>
@@ -134,21 +156,59 @@
         <div class="box"><h2>About</h2></div>
     </div>
     <div class="container d-flex w-75 justify-content-center">
-        <p>Hello, We are Ian, Erinn, and Ryan and we made SQentineL. Ian and Erinn are senior computer science students and Ryan is a junior computer engineering from West Virginia University Institute of Technology located in Beckley, WV. The idea was created by Ian, with his interest in Cybersecurity, he wanted to learn how he can apply his cybersecurity knowledge that can help new programmers be more secure when programming applications.</p>
+        <p>SQentineL is a free, open-source project made by a team of three developers, Ian Bailey, Erinn Keohane, and Ryan Hayden. We are all students at West Virginia University Institute of Technology, located in Beckley, WV. Ian and Erinn are seniors in computer science and Ryan is a junior in computer engineering. The idea was created by Ian, who has an interest and knowledge in the field of cybersecurity. Our mission is to help beginner programmers develop more security conscientious applications as well as require familiarity with techniques necessary in the field.</p>
+    </div>
+
+
+    <div class="container d-flex w-75 mt-5" id="edu">
+        <div class="box"><h2>Educational Resources</h2></div>
     </div>
 
     <div class="container d-flex mt-3 w-75">
-        <h4>What is an SQL Injection</h4>
+        <h4>What is an SQL Injection?</h4>
     </div>
-    <div class="container d-flex mt-3 w-75">
-        <p>Place Holder</p>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://cwe.mitre.org/data/definitions/89.html">https://cwe.mitre.org/data/definitions/89.html</a>
+        </p>
+    </div>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://www.geeksforgeeks.org/sql/sql-injection/">https://www.geeksforgeeks.org/sql/sql-injection/</a>
+        </p>
     </div>
 
     <div class="container d-flex mt-3 w-75">
         <h4>What is an Command Injection?</h4>
     </div>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://cwe.mitre.org/data/definitions/78.html">https://cwe.mitre.org/data/definitions/78.html</a>
+        </p>
+    </div>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://www.geeksforgeeks.org/linux-unix/commix-os-command-injection-and-exploitation-tool/">https://www.geeksforgeeks.org/linux-unix/commix-os-command-injection-and-exploitation-tool/</a>
+        </p>
+    </div>
+
     <div class="container d-flex mt-3 w-75">
-        <p>Place Holder</p>
+        <h4>What is an Code Injection?</h4>
+    </div>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://cwe.mitre.org/data/definitions/94.html">https://cwe.mitre.org/data/definitions/94.html</a>
+        </p>
+    </div>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://cwe.mitre.org/data/definitions/95.html">https://cwe.mitre.org/data/definitions/95.html</a>
+        </p>
+    </div>
+    <div class="container d-flex w-75">
+        <p>
+            <a href="https://www.geeksforgeeks.org/ethical-hacking/code-injection-mitigation-example/">https://www.geeksforgeeks.org/ethical-hacking/code-injection-mitigation-example/</a>
+        </p>
     </div>
 
 </body>
@@ -157,7 +217,7 @@
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="#submitCode" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="#features" class="nav-link px-2 text-body-secondary">Features</a></li>
+            <li class="nav-item"><a href="#edu" class="nav-link px-2 text-body-secondary">Resources</a></li>
             <li class="nav-item"><a href="#FAQs" class="nav-link px-2 text-body-secondary">FAQs</a></li>
             <li class="nav-item"><a href="#about" class="nav-link px-2 text-body-secondary">About</a></li>
         </ul>
