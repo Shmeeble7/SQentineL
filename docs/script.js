@@ -52,6 +52,7 @@ window.onload = function () {
 
                 } catch (error) {
                     console.error("Error:", error);
+                    window.alert("The backend is down!");
                 }
 
             };
@@ -98,6 +99,7 @@ async function sendText() {
 
         } catch (error) {
             console.error("Error:", error);
+            window.alert("The backend is down!");
         }
     }
 
