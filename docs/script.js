@@ -52,7 +52,7 @@ window.onload = function () {
 
                 } catch (error) {
                     console.error("Error:", error);
-                    window.alert("The backend is down!");
+                    window.alert("The backend is not connected!");
                 }
 
             };
@@ -99,7 +99,7 @@ async function sendText() {
 
         } catch (error) {
             console.error("Error:", error);
-            window.alert("The backend is down!");
+            window.alert("The backend is not connected!");
         }
     }
 

@@ -1,5 +1,3 @@
-
-
 function addBox(key_num) {
     const container = document.getElementById('results');
 
@@ -77,8 +75,8 @@ window.onload = function () {
                 const contentElement = document.getElementsByClassName(result_key)[iter];
                 if (contentElement != null && result_value != null) {
                     contentElement.innerHTML += result_value;
-
                     if (result_key == "severity") {
+                        console.log(result_value);
                         let color = "black";
                         if (result_value == "LOW") {
                             color = "#A17F1A";
@@ -107,11 +105,12 @@ window.onload = function () {
             iter += 1;
         }
         const img = document.getElementById("squid-img")
-        if (crit > 1) {
+        if (crit > 0 || high > 0) {
             img.src = "Assets/AngrySquid.png";
+            console.log("HERE");
         }
-        else if (high > 1) {
-            img.src = "Assets/AngrySquid.png";
+        else if (med > 0 || low > 0) {
+            img.src = "Assets/MehSquid.png";
         }
         else {
             img.src = "Assets/Squid.png";
@@ -119,5 +118,3 @@ window.onload = function () {
     }
 
 };
-
-

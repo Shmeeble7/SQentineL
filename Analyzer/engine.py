@@ -4,6 +4,7 @@ from Analyzer.Rules.eval_rule import EvalRule
 from Analyzer.Rules.command_rule import CommandInjectionRule
 from Analyzer.Reporting import templates as tmp
 from Analyzer.Reporting.issue import Issue
+from Analyzer.Reporting.sanitizer import SANITIZER_FUNCTIONS
 RULES = [SQLInjectionRule, EvalRule, CommandInjectionRule]
 
 
@@ -23,6 +24,7 @@ def make_issue(rule_id, line, snippet=""):
         example_payload=t.get("example_payload"),
         example_fix=t.get("example_fix"),
     )
+
 
 class FunctionCollector(ast.NodeVisitor):
     def __init__(self):
@@ -47,8 +49,6 @@ class FunctionCollector(ast.NodeVisitor):
         # attach parent function reference
         node._parent_function = self.current_function
         self.generic_visit(node)
-
-
 
 
 class Analyzer(ast.NodeVisitor):
@@ -105,7 +105,6 @@ class Analyzer(ast.NodeVisitor):
 
         return False
 
-
     # Handle return statements
     def visit_Return(self, node):
         if self.learning_returns and node.value and self.expr_is_tainted(node.value):
@@ -147,37 +146,73 @@ class Analyzer(ast.NodeVisitor):
     #Handle Assignments
     def visit_Assign(self, node):
         value_tainted = self.expr_is_tainted(node.value)
+        sanitized = False
 
-        if isinstance(node.value, ast.Call) and isinstance(node.value.func, ast.Name):
-            if node.value.func.id in self.tainted_returns:
-                value_tainted = True
+        if isinstance(node.value, ast.Call):
+            if isinstance(node.value.func, ast.Name):
+                if node.value.func.id in self.tainted_returns:
+                    value_tainted = True
+
+        # Detect sanitizer calls
+        if isinstance(node.value, ast.Call):
+
+            if isinstance(node.value.func, ast.Name):
+                func_name = node.value.func.id
+
+                if func_name in SANITIZER_FUNCTIONS:
+                    self.generic_visit(node)
+                    sanitized = True
+
+            # Handle attribute calls
+            elif isinstance(node.value.func, ast.Attribute):
+                func_name = node.value.func.attr
+
+                if func_name in SANITIZER_FUNCTIONS:
+                    sanitized = True
 
         for target in node.targets:
             if isinstance(target, ast.Name):
-                if value_tainted:
+
+                if sanitized:
+                    self.tainted.discard(target.id)
+
+                elif value_tainted:
                     self.tainted.add(target.id)
+
                 else:
                     self.tainted.discard(target.id)
 
     # Handle function calls
     def visit_Call(self, node):
+        func_name = None
+
         if isinstance(node.func, ast.Name):
             func_name = node.func.id
 
-            if func_name in self.functions:
-                func_def = self.functions[func_name]
+        elif isinstance(node.func, ast.Attribute):
+            func_name = node.func.attr
 
-                original_taint = self.tainted.copy()
+        # Skip sanitizer functions
+        if func_name in SANITIZER_FUNCTIONS:
+            return
 
-                for arg, param in zip(node.args, func_def.args.args):
-                    if self.expr_is_tainted(arg):
-                        self.tainted.add(param.arg)
+        # Handle user-defined functions ---
+        if func_name in self.functions:
+            func_def = self.functions[func_name]
 
-                for stmt in func_def.body:
-                    self.visit(stmt)
+            original_taint = self.tainted.copy()
 
-                self.tainted = original_taint
-                return
+            for arg, param in zip(node.args, func_def.args.args):
+                if self.expr_is_tainted(arg):
+                    self.tainted.add(param.arg)
+
+            for stmt in func_def.body:
+                self.visit(stmt)
+
+            self.tainted = original_taint
+            return
+
+        self.generic_visit(node)
 
     def visit(self, node):
         method = 'visit_' + node.__class__.__name__
