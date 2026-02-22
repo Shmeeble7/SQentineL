@@ -74,7 +74,7 @@ TEMPLATES = {
         "explanation": "The text you entered was not a valid form of input",
         "danger": "You can't learn anything :(",
         "fix": "SQentineL can only handle python code currently",
-        "severity": "INFO",
+        "severity": "LOW",
         "confidence": "HIGH",
     },
 
@@ -83,7 +83,7 @@ TEMPLATES = {
         "explanation": "Your input contains a syntax error",
         "danger": "SQentineL cannot analyze that code",
         "fix": "Fix your program syntax before passing in the code",
-        "severity": "INFO",
+        "severity": "LOW",
         "confidence": "HIGH",
     },
 
