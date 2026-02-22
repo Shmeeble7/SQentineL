@@ -27,6 +27,9 @@ TEMPLATES = {
 
         "fix":
             "Replace concatenation with query parameters.",
+
+        "example_payload": "' OR '1'='1",
+        "example_fix": 'cursor.execute("SELECT * FROM users WHERE name = ?", (username,))'
     },
 
 
@@ -34,7 +37,9 @@ TEMPLATES = {
         "title": "SQL query built using f-string",
         "explanation": "Python f-strings insert variables directly into SQL text.",
         "danger": "If the variable contains SQL, it becomes part of the command.",
-        "fix": "Use placeholders (?) and pass variables separately."
+        "fix": "Use placeholders (?) and pass variables separately.",
+        "example_payload": "'; DROP TABLE users; --",
+        "example_fix": 'cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))'
     },
 
     "CMDI_OS": {
@@ -88,10 +93,13 @@ TEMPLATES = {
             "User-controlled data is passed directly into a dynamic execution function such as eval or exec.",
 
         "danger":
-            "An attacker can execute arbitrary Python code on the server.",
+            "This is reliably exploitable remote code execution.",
 
         "fix":
             "Avoid using eval/exec on user input. Use safer alternatives like literal parsing or explicit logic.",
+
+        "severity": "Critical",
+        "confidence": "High",
 
         "example_payload": "__import__('os').system('whoami')",
         "example_fix":
@@ -110,6 +118,9 @@ TEMPLATES = {
         "fix":
             "Do not build executable code using string concatenation. Refactor to avoid dynamic execution.",
 
+        "severity": "HIGH",
+        "confidence": "MEDIUM",
+
         "example_payload": "1); __import__('os').system('ls') #",
         "example_fix":
             "Replace dynamic execution with direct function calls or safe parsing."
@@ -126,6 +137,9 @@ TEMPLATES = {
 
         "fix":
             "Avoid f-strings for executable code. Use controlled logic instead of dynamic execution.",
+
+        "severity": "HIGH",
+        "confidence": "MEDIUM",
 
         "example_payload": "__import__('os').system('cat /etc/passwd')",
         "example_fix":
@@ -144,6 +158,9 @@ TEMPLATES = {
         "fix":
             "Validate or sanitize returned values before use, and avoid dynamic execution functions.",
 
+        "severity": "HIGH",
+        "confidence": "HIGH",
+
         "example_payload": "__import__('subprocess').getoutput('whoami')",
         "example_fix":
             "Ensure functions return validated data and remove eval/exec usage."
@@ -159,6 +176,11 @@ TEMPLATES = {
             "This can result in arbitrary code execution and full system compromise.",
 
         "fix":
-            "Remove dynamic execution of untrusted input and redesign the logic safely."
+            "Remove dynamic execution of untrusted input and redesign the logic safely.",
+
+        "severity": "MEDIUM",
+        "confidence": "LOW",
+
+
     },
 }
