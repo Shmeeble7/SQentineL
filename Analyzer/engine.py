@@ -236,7 +236,6 @@ class Analyzer(ast.NodeVisitor):
 
 
 def analyze(code: str):
-    # Reject empty or whitespace-only input
     if not code or not code.strip():
         return [make_issue("IMPROPER_INPUT", 0, code)]
 
@@ -245,7 +244,23 @@ def analyze(code: str):
     except SyntaxError as e:
         return [make_issue("SYNTAX_ERROR", e.lineno or 0, code)]
 
-    if not tree.body:
+        # Reject files that contain only bare names or literals
+    meaningful_nodes = (
+        ast.Assign,
+        ast.Call,
+        ast.FunctionDef,
+        ast.AsyncFunctionDef,
+        ast.ClassDef,
+        ast.Import,
+        ast.ImportFrom,
+        ast.If,
+        ast.For,
+        ast.While,
+        ast.With,
+        ast.Try,
+    )
+
+    if not any(isinstance(node, meaningful_nodes) for node in tree.body):
         return [make_issue("IMPROPER_INPUT", 0, code)]
 
     collector = FunctionCollector()
