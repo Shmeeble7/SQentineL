@@ -56,7 +56,8 @@ window.onload = function () {
     if (localStorage.length == 0) {
         const safe_div = this.document.getElementById("safe-div");
         safe_div.style.display = "block";
-
+        const img = document.getElementById("squid-img")
+        img.src = "Assets/ExcitedSquid.png";
     }
     else {
 
