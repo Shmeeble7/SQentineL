@@ -60,6 +60,7 @@ class Analyzer(ast.NodeVisitor):
         self.tainted_returns = set()
         self.learning_returns = False
         self.import_aliases = {}
+        self.reported_findings = set()
 
     def contains_source(self, node):
         if isinstance(node, ast.Call):

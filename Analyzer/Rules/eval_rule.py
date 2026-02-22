@@ -28,8 +28,6 @@ class EvalRule(BaseRule):
         if not self.analyzer.expr_is_tainted(payload):
             return
 
-        # ---- Classification AFTER taint confirmed ----
-
         # f-string injection
         if isinstance(payload, ast.JoinedStr):
             self.report(node, "EVAL_FSTRING",

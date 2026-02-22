@@ -9,6 +9,7 @@ class BaseRule:
     def __init__(self, analyzer):
         self.analyzer = analyzer
         self.issues = []
+        self.seen = set()
 
     def is_tainted(self, node):
         return self.analyzer.expr_is_tainted(node)
@@ -18,6 +19,13 @@ class BaseRule:
 
         severity, confidence = self.score(template_key, evidence)
         source = self.analyzer.source_lines[node.lineno - 1]
+
+        signature = (node.lineno, template_key, self.id)
+        # prevent duplicate reports
+        if signature in self.seen:
+            return
+
+        self.seen.add(signature)
 
         issue = Issue(
             line=node.lineno,
