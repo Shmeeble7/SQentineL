@@ -26,6 +26,7 @@ class CodeInput(BaseModel):
 @app.post("/analyze")
 def scan(request: CodeInput):
     results = analyze_to_json(request.text)
+    print(results[0]["severity"])
     return {"results": results}
 
 
