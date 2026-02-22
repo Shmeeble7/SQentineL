@@ -92,7 +92,7 @@ window.onload = function () {
                             high += 1;
                         }
                         else {
-                            color = "red";
+                            color = "maroon";
                             crit += 1;
                         }
                         const header_key = "key-header-" + iter;

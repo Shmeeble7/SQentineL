@@ -19,6 +19,8 @@ window.onload = function () {
 
 
         if (file) {
+
+            localStorage.clear();
             const reader = new FileReader();
 
             reader.onload = async (e) => {
@@ -72,6 +74,7 @@ async function sendText() {
 
     async function sendData() {
         try {
+            localStorage.clear();
             const response = await fetch("http://127.0.0.1:8000/analyze", {
                 method: "POST",
                 headers: {
