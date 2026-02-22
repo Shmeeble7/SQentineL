@@ -236,14 +236,17 @@ class Analyzer(ast.NodeVisitor):
 
 
 def analyze(code: str):
-    # Filter out non-code inputs/non-python inputs
-    if code.count("\n") < 1 and not any(x in code for x in ["(", "=", "def ", "import "]):
+    # Reject empty or whitespace-only input
+    if not code or not code.strip():
         return [make_issue("IMPROPER_INPUT", 0, code)]
 
     try:
         tree = ast.parse(code)
     except SyntaxError as e:
-        return [make_issue("SYNTAX_ERROR", e.lineno, code)]
+        return [make_issue("SYNTAX_ERROR", e.lineno or 0, code)]
+
+    if not tree.body:
+        return [make_issue("IMPROPER_INPUT", 0, code)]
 
     collector = FunctionCollector()
     collector.visit(tree)
