@@ -6,7 +6,7 @@ function addBox(key_num) {
     const key = "key-" + key_num;
     const key_header = "key-header-" + key_num;
     const key_btn = "key-btn-" + key_num;
-    container.innerHTML += `<div class="d-flex info_div flex-column pt-3">
+    container.innerHTML += `<div class="d-flex info-div flex-column pt-3">
             <div id = "` + key_header + `" class="info-div-header d-flex flex-row justify-content-center align-items-center rounded">
                 <h4 class="severity p-2">SEVERITY </h4>
                 <p class=" title p-2 pt-3 me-5 text-center"></p>
