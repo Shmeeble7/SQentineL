@@ -53,13 +53,31 @@ class BaseRule:
         if template_key == "SQLI_CONCAT":
             return "MEDIUM", "MEDIUM"
 
+        if template_key == "SQLI_RETURN":
+            return "HIGH", "HIGH"
+
         if template_key == "CMDI_OS":
             return "CRITICAL", "HIGH"
 
         if template_key == "CMDI_SUBPROCESS":
             return "CRITICAL", "MEDIUM"
 
-        return "LOW", "LOW"
+        if template_key == "EVAL_TAINT":
+            return "CRITICAL", "HIGH"
+
+        if template_key == "EVAL_CONCAT":
+            return "HIGH", "MEDIUM"
+
+        if template_key == "EVAL_FSTRING":
+            return "HIGH", "MEDIUM"
+
+        if template_key == "EVAL_FSTRING":
+            return "HIGH", "HIGH"
+
+        if template_key == "EVAL_GENERIC":
+            return "MEDIUM", "LOW"
+
+        return "UNCLASSIFIED", "UNCLASSIFIED"
 
     def visit_Call(self, node): pass
     def visit_Assign(self, node): pass
