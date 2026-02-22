@@ -1,3 +1,9 @@
+# =========================================================
+# This is meant to be used purely for testing the analyzer.
+# Please do not be a dingus and actually use it.
+# ==========================================================
+
+
 # Direct eval
 user_input = input("Enter code: ")
 eval(user_input)
